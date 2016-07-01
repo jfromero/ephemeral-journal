@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>MoodyBin</title>
+	<meta name="description" content="Moodybin">
+	<meta name="author" content="juanfran.work">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="css/styles.css">
+
+	<style>
+		#mainquestion {
+			font-size: 30px;
+			margin-top: 40px;
+			margin-bottom: 20px;
+			color: #2F4F4F;
+		}
+
+		#thoughtsbox {
+			height: 70vh;
+			width: 90vw;
+			font-size: 20px;
+			border-color: #D3D3D3;
+			color: #121212;
+		}
+
+		#recyclebtn {
+			width: 90vw;
+			font-size: 30px;
+		}
+
+		#explanation {
+			color: #808080;
+		}
+	</style>
+
+</head>
+<body>
+	<div id="container">
+		<div class="row">
+			<div class="col-12 text-center">
+				<p id="mainquestion">
+					How are you?
+				</p>
+				<p id="explanation">
+					feel free to write whatever you want. No content will be saved.
+				</p>
+				<form id="frm">
+					<textarea id="thoughtsbox"></textarea>
+					<button id="recyclebtn" class="btn btn-danger">Recycle it!</button>
+				</form>
+
+			</div>
+		</div>
+
+	</div>
+	<script   src="https://code.jquery.com/jquery-3.0.0.min.js"   integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0="   crossorigin="anonymous"></script>
+	<script>
+		var textareas = document.getElementsByTagName('textarea');
+		var count = textareas.length;
+		for(var i=0;i<count;i++){
+		    textareas[i].onkeydown = function(e){
+		        if(e.keyCode==9 || e.which==9){
+		            e.preventDefault();
+		            var s = this.selectionStart;
+		            this.value = this.value.substring(0,this.selectionStart) + "\t" + this.value.substring(this.selectionEnd);
+		            this.selectionEnd = s+1;
+		        }
+		    }
+		}
+
+		$('#recyclebtn').click(function(evt) {
+			evt.preventDefault();
+			$('#thoughtsbox').fadeOut(1000, "linear", function(){
+				$('#thoughtsbox').val("");
+			});
+			$('#thoughtsbox').fadeIn("slow", "linear", function() {
+			});
+
+		});
+
+	</script>
+</body>
+</html>
